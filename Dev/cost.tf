@@ -1,5 +1,5 @@
 # AWS Budget to monitor monthly spending for EC2
-resource "aws_budgets_budget" "bs101-dev_budget" {
+resource "aws_budgets_budget" "saffire-dev_budget" {
   name         = "AppBudget"
   budget_type  = "COST"
   limit_amount = "500"
@@ -12,12 +12,10 @@ resource "aws_budgets_budget" "bs101-dev_budget" {
     threshold_type      = "PERCENTAGE"
     notification_type   = "ACTUAL"
     # List of subscribers for the notification
-    subscriber_email_addresses = ["samuel.ogah@zicloudtech.com"]
+    subscriber_email_addresses = ["timoige87@gmail.com"]
   }
 
   tags = {
-    Name = "bs101-dev_budget"
+    Name = "saffire-dev_budget"
   }
 }
-
-

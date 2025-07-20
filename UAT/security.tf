@@ -1,6 +1,6 @@
 # IAM Role for EC2 to allow access to AWS services
-resource "aws_iam_role" "bs101-uat_ec2_role" {
-  name = "bs101-uat_ec2_role"
+resource "aws_iam_role" "saffire-uat_ec2_role" {
+  name = "saffire-uat_ec2_role"
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
     Statement = [{
@@ -14,13 +14,13 @@ resource "aws_iam_role" "bs101-uat_ec2_role" {
   })
 
   tags = {
-    Name = "bs101-uat_ec2_role"
+    Name = "saffire-uat_ec2_role"
   }
 }
 
 # IAM Policy to allow access to Secrets Manager
-resource "aws_iam_policy" "bs101-uat_secrets_manager_policy" {
-  name        = "bme-uat-app-secrets-manager-policy"
+resource "aws_iam_policy" "saffire-uat_secrets_manager_policy" {
+  name        = "saffire-uat-app-secrets-manager-policy"
   description = "Allow EC2 to access Secrets Manager"
 
   policy = jsonencode({
@@ -39,19 +39,19 @@ resource "aws_iam_policy" "bs101-uat_secrets_manager_policy" {
 }
 
 # Attach Secrets Manager Policy to the EC2 Role
-resource "aws_iam_role_policy_attachment" "bs101-uat_attach_secrets_policy" {
-  role       = aws_iam_role.bs101-uat_ec2_role.name
-  policy_arn = aws_iam_policy.bs101-uat_secrets_manager_policy.arn
+resource "aws_iam_role_policy_attachment" "saffire-uat_attach_secrets_policy" {
+  role       = aws_iam_role.saffire-uat_ec2_role.name
+  policy_arn = aws_iam_policy.saffire-uat_secrets_manager_policy.arn
 }
 
-#resource "aws_secretsmanager_secret" "bs101-uat_db_credentials" {
-#  name        = "bme-uat-app-db-credentials"
+#resource "aws_secretsmanager_secret" "saffire-uat_db_credentials" {
+#  name        = "saffire-uat-app-db-credentials"
 #  description = "Database credentials for the application"
 #}
 
 # Store secret values (username/password) in Secrets Manager
-#resource "aws_secretsmanager_secret_version" "bs101-uat_db_credentials_version" {
-#  secret_id     = aws_secretsmanager_secret.bs101-uat_db_credentials.id
+#resource "aws_secretsmanager_secret_version" "saffire-uat_db_credentials_version" {
+#  secret_id     = aws_secretsmanager_secret.saffire-uat_db_credentials.id
 #  secret_string = jsonencode({
 #    username = "admin",
 #    password = "password123" # Replace with a secure password
@@ -59,9 +59,9 @@ resource "aws_iam_role_policy_attachment" "bs101-uat_attach_secrets_policy" {
 #}
 
 # Security Group for the Web Server
-resource "aws_security_group" "bs101-uat_web_sg" {
-  name   = "bme-uat-app-web-sg"
-  vpc_id = aws_vpc.bs101-uat.id # Ensure this VPC is declared
+resource "aws_security_group" "saffire-uat_web_sg" {
+  name   = "saffire-uat-app-web-sg"
+  vpc_id = aws_vpc.saffire-uat.id # Ensure this VPC is declared
 
   # Allow HTTP traffic on port 80 from any IP
   ingress {

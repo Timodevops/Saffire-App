@@ -1,9 +1,10 @@
 terraform {
   backend "s3" {
-    bucket         = "bs101-uat-app-buckettt"
+
+    bucket         = "saffire-uat-app-buckett"
     key            = "uat/terraform.tfstate"         # Use a unique path per environment
     region         = "us-west-2"
-    #dynamodb_table = "bs101-uat-app-dbb"
+    #dynamodb_table = "saffire-uat-app-db"
     encrypt        = true
   }
 }
